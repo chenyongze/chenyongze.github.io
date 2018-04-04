@@ -11,6 +11,7 @@ url: http://yongze.dotalk.cn
 domain: yongze.dotalk.cn
 all_categories: [
 ["PHP", "PHP","/posts/php.html"], 
+["Golang", "Golang","/posts/go.html"], 
 # ["program", "软件编程","/posts/program.html"],
 # ["web", "Web建站","/posts/web.html"], 
 # ["linux", "Linux相关","/posts/linux.html"],
