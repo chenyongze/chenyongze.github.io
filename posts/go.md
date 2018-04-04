@@ -1,4 +1,4 @@
-    ---
-    layout: category
-    category: go
-    ---
+---
+layout: category
+category: go
+---
