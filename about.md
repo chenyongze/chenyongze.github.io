@@ -5,24 +5,18 @@ title: "关于：About"
 Welcome to visit my blog!
 
 #### 1.Personal Info
-Name: Xuewen Pan(潘学文)  
+Name: Yongze Chen(陈永泽)  
 Gender: Male  
-City: Wuhan, China  
-Career: Software developer(Android&Linux&Web)  
+City: AnHui, China  
+Career: Software developer(Go&PHP&Linux&Web)  
 
 #### 2.My Links
-Blog: <http://www.panxw.com>  
-GitHub: <https://github.com/panxw>  
-LinkedIn: <http://www.linkedin.com/in/panxw>  
+Blog: <http://yongze.dotalk.cn>  
+GitHub: <https://github.com/chenyongze>  
 
 
 #### 3.Contract
-Email: winfirm#163.com  
-QQ: 85902258  
+Email: sapphire.php#gmail.com  
+QQ: 1835962399  
 
-### 4.Domain For Sale
-danbaili.com  
-fangxinyu.com  
-maicaiwa.com  
-babytoycar.com  
-youth168.com  
+
