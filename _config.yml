@@ -8,7 +8,7 @@ author: "yongze.chen"
 email: sapphire.php@gmail.com
 name: "Yongze个人博客"
 url: http://yongze.dotalk.cn
-domain: www.panxw.com
+domain: yongze.dotalk.cn
 all_categories: [
 ["android", "Android开发","/posts/android.html"], 
 ["program", "软件编程","/posts/program.html"],
