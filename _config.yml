@@ -16,10 +16,18 @@
 title: Yongze-Blog
 email: sapphire.php@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "yongze.dotalk.cn" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: jekyllrb
+nav_lists:
+  - titles:
+      en: About
+      zh: 关于
+      zh-Hans: 关于
+      zh-Hant: 關於
+    url: /about.html
+  - title: Baidu
+    url: https://www.baidu.co
 github_username:  chenyongze
 
 # Build settings
