@@ -1,32 +1,55 @@
-markdown: kramdown
-highlighter: pygments
-permalink: /posts/:title.html
-excerpt_separator: "<!-- more -->"
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 
-github: chenyongze
-author: "yongze.chen"
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+title: Yongze blog
+author: yongze.chen
 email: sapphire.php@gmail.com
-name: "Yongze个人博客"
-url: http://yongze.dotalk.cn
-domain: yongze.dotalk.cn
-all_categories: [
-["PHP", "PHP","/posts/php.html"], 
-["Golang", "Golang","/posts/go.html"], 
-# ["program", "软件编程","/posts/program.html"],
-# ["web", "Web建站","/posts/web.html"], 
-# ["linux", "Linux相关","/posts/linux.html"],
-# ["read", "读书笔记","/posts/read.html"], 
-# ["other", "杂记","/posts/other.html"],
-["about", "关于","/about.html"]
-]
+description: > # this means to ignore newlines until "baseurl:"
+  程序媛/小硕/外协/折腾/技术宅
+url: http://yongze.dotalk.cn # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "" # the subpath of your site, e.g. /blog
 
-paginate: 8
-paginate_path: "posts/page:num"
-timezone: America/Los_Angeles
+# Markdown Processors
+markdown: kramdown
 
-collections:
-  docs:
-    output: true
+plugins:
+  - jekyll-paginate
+paginate: 5
+paginate_path: "/pages:num/"
 
-gems:
- - jekyll-paginate
+mathjax: false
+
+excerpt_separator: <!-- more -->
+
+permalink: /:categories/:title.html
+
+social_media:
+  github_url: https://github.com/chenyongze
+  # weibo_url: http://weibo.com/u/2313016370
+  # zhihu_url: https://www.zhihu.com/people/lszero
+  # twitter_url: https://twitter.com/_lszero
+  # lofter_url: http://intzero.lofter.com/
+
+# Exclude from processing.
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
+# exclude:
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
