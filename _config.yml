@@ -17,7 +17,7 @@ title: Yongze blog
 author: yongze.chen
 email: sapphire.php@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  程序媛/小硕/外协/折腾/技术宅
+  PHP/Golang/nodejs
 url: http://yongze.dotalk.cn # the base hostname & protocol for your site, e.g. http://example.com
 baseurl: "" # the subpath of your site, e.g. /blog
 
