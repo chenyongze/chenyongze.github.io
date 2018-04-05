@@ -21,5 +21,5 @@ tags: [shell,ssh]
     scp $TAG_PACK root@${WEBIP}:$S_PATH
     rm $TAG_PACK
     ssh root@$WEBIP "cd ${S_PATH} && tar -zxvf ${TAG_PACK} && rm ${TAG_PACK}"
-    echo "=========== sucess ================
+    echo "=========== sucess ================"
 ```
