@@ -7,6 +7,7 @@ tags: [yum,linux,shell]
 ---
 
 > yum   资源
+
 ```
     [root@iZm5e0o3yq2o3sc6vc3hu0Z yum.repos.d]# ll
     总用量 52
