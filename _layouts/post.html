@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-
+<!--文章详情-->
 <div class="container">
   <div class="row-fluid main">
     <div class="col-md-9 content">
@@ -9,6 +9,7 @@ layout: default
         <h1 class="post-title">{{ page.title }}</h1>
 
         <div class="post-info">
+          <i class="fa fa-clock-o"></i>
           <span class="post-date">{{ page.date | date_to_string }}</span>
           {% if page.categories.size > 0 %} | 
             <span class="fa fa-folder-open" aria-hidden="true">
