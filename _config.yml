@@ -16,7 +16,7 @@ side_bar_repo_limit: 5
 #      Author      #
 # ---------------- #
 author: yongze.chen
-organization: Web Developer
+organization: Backend Developer
 organization_url: https://yongze.dotalk.cn
 github_username: chenyongze
 location: Beijing, China
@@ -73,7 +73,7 @@ collections:
         output: true
         permalink: /wiki/:path/
 
-repository: yansongda/yansongda.github.io
+repository: chenyongze/chenyongze.github.io
 
 # ---------------- #
 #      Comments    #
@@ -85,7 +85,7 @@ comments_provider: disqus
 # !!!Important!!! Please modify infos below to yours
 # https://disqus.com
 disqus:
-    username: yansongda
+    username: chenyongze
 
 # https://imsun.net/posts/gitment-introduction/
 gitment:
