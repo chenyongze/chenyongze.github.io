@@ -11,7 +11,7 @@ tags: [github, jekyll, bootstrap]
 对前端只停留在css的我，花了整三天时间，从Hexo到Jekyll再到Bootstrap，以及各种markdown2html解析器...最后基本算是从头写了一个基于Jekyll的website theme 😓  在此记录了各种前端坑，自认为还算详细吧。<!-- more -->
 
 
-# Hexo
+## Hexo
 
 主流的静态页面生成器有俩，一个Jekyll，一个Hexo，都支持Markdown。 前者用的是Ruby，后者为Node.js。
 
@@ -30,7 +30,7 @@ $ npm install hexo-renderer-kramed --save
 ~~~
 
 
-# Jekyll
+## Jekyll
 
 其实用Hexo/Jekyll+现成的主题，很方便就能搭出一个静态网站出来。只是除了代码高亮、LaTex这些功能之外，我还想能区分出code block 和普通无需highlighting的`<pre>`部分，还有其他一些改动。因为markdown解析的原因，基本所有themes出的效果都是将两者统一处理了。强迫症（其实就是zuo），主题挑来挑去都没找到个合心意的，比如next这种，太复杂，让我一个前端白痴改，哈，那还是自己从头写一个比较符合程序员造轮子的习惯吧。。。（捂脸
 
