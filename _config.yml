@@ -2,7 +2,7 @@
 #   Main Configs   #
 # ---------------- #
 baseurl:
-url: http://yongze.dotalk.cn
+url: https://yongze.dotalk.cn
 date_format: "ordinal"
 title: Yongze | Chen
 subtitle: "Coding My Life..."
