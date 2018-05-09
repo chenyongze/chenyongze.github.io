@@ -2,12 +2,12 @@
 #   Main Configs   #
 # ---------------- #
 baseurl:
-url: https://yansongda.cn
+url: http://yongze.dotalk.cn
 date_format: "ordinal"
-title: 闫嵩达 | yansongda
+title: Yongze | yansongda
 subtitle: "Coding My Life..."
-description: "yansongda's Tech Blog"
-keywords: 闫嵩达, yansongda, pay, laravel-pay
+description: "Yongze's Tech Blog"
+keywords: 陈永泽, yongze
 timezone: Asia/Shanghai
 encoding: "utf-8"
 side_bar_repo_limit: 5
@@ -15,12 +15,12 @@ side_bar_repo_limit: 5
 # ---------------- #
 #      Author      #
 # ---------------- #
-author: yansongda
+author: yongze.chen
 organization: Web Developer
-organization_url: https://yansongda.cn
-github_username: yansongda
-location: Guangdong, China
-email: me@yansongda.cn
+organization_url: https://yongze.dotalk.cn
+github_username: chenyongze
+location: Beijing, China
+email: sapphire.php@gmail.com
 
 # ---------------- #
 #    Navigation    #
