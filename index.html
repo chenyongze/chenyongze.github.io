@@ -1,80 +1,99 @@
 ---
 layout: default
-title: Home
+class: home
+css: ['pages/index.css']
+comments: false
 ---
 
-<div class="container">
-  <div class="row-fluid main">
-    <div class="col-md-9 content main-posts-preview">
-      {% for post in paginator.posts %}
-      <article class="post-preview">
-        <h3 class="post-title">
-          <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-        </h3>
-
-        <div class="post-info">
-          <i class="fa fa-clock-o"></i>
-          <span class="post-date">{{ post.date | date_to_string }}</span>
-          {% if post.categories.size > 0 %} | 
-            <span class="fa fa-folder-open" aria-hidden="true">
-            {% for category in post.categories %}
-              <a class="post-categories" href="{{ site.baseurl }}/categories.html#{{ category }}">{{ category }}</a>
-            {% endfor %}
-            </span>
-          {% endif %}
-          {% if post.tags.size > 0 %} | 
-            <span class="fa fa-tag" aria-hidden="true">
-            {% for tag in post.tags %}
-              <a class="post-tags" href="{{ site.baseurl }}/tags.html#{{ tag }}">{{ tag }}</a>
-            {% endfor %}
-            </span>
-          {% endif %}
+<section class="banner">
+    <div class="collection-head">
+        <div class="container">
+            <div class="collection-title">
+                <h1 class="collection-header" id="sub-title"><span>{{ site.subtitle }}</span></h1>
+                <div class="collection-info">
+                    <span class="meta-info mobile-hidden">
+                        <span class="octicon octicon-location"></span>
+                        {{ site.location }}
+                    </span>
+                    <span class="meta-info">
+                        <span class="octicon octicon-organization"></span>
+                        <a href="{{ site.organization_url }}" target="_blank">{{ site.organization }}</a>
+                    </span>
+                    <span class="meta-info">
+                        <span class="octicon octicon-mark-github"></span>
+                        <a href="https://github.com/{{ site.github_username }}" target="_blank">{{ site.github_username }}</a>
+                    </span>
+                </div>
+            </div>
         </div>
-
-        <div class="post-excerpt">
-          {{ post.excerpt }}
+    </div>
+</section>
+<!-- /.banner -->
+<section class="container content">
+    <div class="columns">
+        <div class="column two-thirds" >
+            <ol class="repo-list">
+                {% for post in paginator.posts %}
+                <li class="repo-list-item">
+                    <h3 class="repo-list-name">
+                        <a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
+                    </h3>
+                    <p class="repo-list-description">
+                        {{ post.excerpt | strip_html | strip }}
+                    </p>
+                    <p class="repo-list-meta">
+                        <span class="meta-info">
+                            <span class="octicon octicon-calendar"></span> {{ post.date | date: "%Y/%m/%d" }}
+                        </span>
+                        {% for cat in post.categories %}
+                        <span class="meta-info">
+                            <span class="octicon octicon-file-directory"></span>
+                            <a href="{{ site.url }}/categories/#{{ cat }}" title="{{ cat }}">{{ cat }}</a>
+                        </span>
+                        {% endfor %}
+                    </p>
+                </li>
+                {% endfor %}
+            </ol>
         </div>
-
-        <div class="post-readmore">
-          <a class="read-more" href="{{ post.url }}">Read More</a>
+        <div class="column one-third">
+            {% include sidebar-search.html %}
+            {% include sidebar-popular-repo.html %}
         </div>
-      </article>
-      <hr />
-      {% endfor %}
-
-      {% if paginator.total_pages >= 1 %}
-      <nav aria-label="Page navigation">
-        <ul class="pagination">
-          {% if paginator.previous_page %}
-            <li><a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo;</a></li>
-          {% else %}
-            <li><span>&laquo;</span></li>
-          {% endif %}
-
-          {% for page in (1..paginator.total_pages) %}
-            {% if page == paginator.page %}
-              <li class="active"><a>{{ page }}</a></li>
-            {% elsif page == 1 %}
-              <li><a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
-              </li>
+    </div>
+    <div class="pagination text-align">
+      <div class="btn-group">
+        {% if paginator.previous_page %}
+            {% if paginator.previous_page == 1 %}
+                <a href="{{ site.url }}/" class="btn btn-outline">&laquo;</a>
             {% else %}
-              <li><a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a></li>
+                <a href="{{ site.url }}/page{{paginator.previous_page}}"  class="btn btn-outline">&laquo;</a>
             {% endif %}
-          {% endfor %}
+        {% else %}
+            <button disabled="disabled" href="javascript:;" class="btn btn-outline">&laquo;</button>
+        {% endif %}
 
-          {% if paginator.next_page %}
-            <li><a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">&raquo;</a></li>
-          {% else %}
-            <li><span>&raquo;</span></li>
-          {% endif %}
-        </ul>
-      </nav>
-      {% endif %}
+        {% if paginator.page == 1 %}
+            <a href="javascript:;" class="active btn btn-outline">1</a>
+        {% else %}
+            <a href="{{ site.url }}/"  class="btn btn-outline">1</a>
+        {% endif %}
+
+        {% for count in (2..paginator.total_pages) %}
+            {% if count == paginator.page %}
+                <a href="javascript:;"  class="active btn btn-outline">{{count}}</a>
+            {% else %}
+                <a href="{{ site.url }}/page{{count}}"  class="btn btn-outline">{{count}}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if paginator.next_page %}
+            <a href="{{ site.url }}/page{{paginator.next_page}}"  class="btn btn-outline">&raquo;</a>
+        {% else %}
+            <button disabled="disabled" href="javascript:;" class="btn btn-outline">&raquo;</button>
+        {% endif %}
+        </div>
     </div>
-
-    <div class="col-md-3 main-sidebar">
-      {% include {{ site.baseurl }}sidebar_main.html %}
-    </div>
-  </div>
-</div>
-
+    <!-- /pagination -->
+</section>
+<!-- /section.content -->
