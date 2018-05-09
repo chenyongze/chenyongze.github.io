@@ -2,7 +2,7 @@
 layout: page
 title: About
 description: Coding My Life...
-keywords: yansongda, 闫嵩达
+keywords: 陈永泽 chenyongze
 comments: true
 menu: 关于
 permalink: /about.html
@@ -10,20 +10,10 @@ permalink: /about.html
 
 ## 基本信息
 
-* 姓名：闫嵩达
 
-* 性别：男
-
-* 年龄：24岁，1993-04
-
-* 工作经验：3年，项目经验：4年
 
 
 ## 联系方式
-
-{% for website in site.data.social %}
-* {{ website.sitename }}：[{{ website.name }}]({{ website.url }})
-{% endfor %}
 
 
 ## 教育经历
