@@ -37,10 +37,9 @@ navs:
     -
         href: /open-source/
         label: 开源贡献
-
     -
         href: /about.html
-        label: 关于
+        label: 自我介绍
 
 # ---------------- #
 #       RSS        #
