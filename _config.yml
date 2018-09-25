@@ -5,7 +5,8 @@ baseurl:
 url: https://yongze.dotalk.cn
 date_format: "ordinal"
 title: Yongze.Chen
-subtitle: "Coding My Life..."
+subtitle: ""
+#subtitle: "Coding My Life..."
 description: "Yongze's Tech Blog"
 keywords: 陈永泽, yongze
 timezone: Asia/Shanghai
