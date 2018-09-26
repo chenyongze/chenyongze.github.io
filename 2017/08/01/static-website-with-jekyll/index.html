@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="/favicon.ico">
+  
+    
+  <title>从WordPress到静态网站 | Yongze.Chen Blogs</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>Yongze.Chen Blogs</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>从WordPress到静态网站</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2017年08月01日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/coding4fun/">coding4fun</a>
+  </div>
+
+
+
+            
+            
+              | 
+                  <i class="fa fa-tags" aria-hidden="true"></i>
+                
+               
+  <a href="/tags/#jekyll" class='tag'>jekyll</a>
+
+  <a href="/tags/#github" class='tag'>github</a>
+
+  <a href="/tags/#bootstrap" class='tag'>bootstrap</a>
+
+
+            
+          </div>
+          <p>作为一个极简主义者，越来越受不了WordPress的臃肿。主要自己平时都是用Markdown来做记录，而WordPress支持的不是很好，另外有时写的md长文通过三方软件导出的html也不造放在wp的什么地方才合适，管理起来还不如几个静态页面来得方便。于是有了某天来个大整顿的想法。</p>
+<p>对前端只停留在css的我，花了整三天时间，从Hexo到Jekyll再到Bootstrap，以及各种markdown2html解析器…最后基本算是从头写了一个基于Jekyll的website theme 😓  在此记录了各种前端坑，自认为还算详细吧。<a id="more"></a></p>
+<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><p>主流的静态页面生成器有俩，一个Jekyll，一个Hexo，都支持Markdown。 前者用的是Ruby，后者为Node.js。</p>
+<p>Hexo会比Jekyll搭建起来更方便一些，而且各种配置项的设计也很便捷，网站themes还很丰富，所以我一开始弄的就是这个。</p>
+<ul>
+<li><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo官方文档</a></li>
+<li><a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">next</a> : 一款优雅并且功能强大的主题. <a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">[doc]</a> <a href="[http://notes.iissnan.com](http://notes.iissnan.com/">[demo]</a>)</li>
+</ul>
+<p>搭建方法上面这两个链接写的很详细。</p>
+<p>这里主要记录一下让Hexo支持LaTex的注意地方。Hexo用MathJax时会有一些<a href="http://2wildkids.com/2016/10/06/%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86Hexo%E5%92%8CMathJax%E7%9A%84%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/#" target="_blank" rel="noopener">转义问题</a>，经我自己测试，最好的方式是用<code>hexo-renderer-pandoc</code>渲染器代替原有的<code>hexo-renderer-marked</code>。而网上说的用<code>hexo-renderer-kramed</code>，对矩阵的情况显示的不好。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm uninstall hexo-renderer-marked --save</span><br><span class="line">$ npm install hexo-renderer-kramed --save</span><br></pre></td></tr></table></figure>
+<h2 id="Jekyll"><a href="#Jekyll" class="headerlink" title="Jekyll"></a>Jekyll</h2><p>其实用Hexo/Jekyll+现成的主题，很方便就能搭出一个静态网站出来。只是除了代码高亮、LaTex这些功能之外，我还想能区分出code block 和普通无需highlighting的<code>&lt;pre&gt;</code>部分，还有其他一些改动。因为markdown解析的原因，基本所有themes出的效果都是将两者统一处理了。强迫症（其实就是zuo），主题挑来挑去都没找到个合心意的，比如next这种，太复杂，让我一个前端白痴改，哈，那还是自己从头写一个比较符合程序员造轮子的习惯吧。。。（捂脸</p>
+<p>（至于为啥从Hexo转到了Jekyll，原因未明）</p>
+<h2 id="Get-Started"><a href="#Get-Started" class="headerlink" title="Get Started"></a>Get Started</h2><p>参考：<a href="https://jekyllrb.com/docs/home/" target="_blank" rel="noopener">Jekyll Doc</a> (<a href="http://jekyll.com.cn/docs/home/" target="_blank" rel="noopener">中文版</a>，内容比较旧)</p>
+<h3 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h3><p>本来在本地用Homebrew安装一路顺畅，但放到服务器就各种问题。</p>
+<p>首先直接用apt-get下载的Ruby版本比较旧。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Install Ruby &amp; RubyGems</span><br><span class="line">$ sudo apt-add-repository ppa:brightbox/ruby-ng</span><br><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install ruby2.4</span><br><span class="line"></span><br><span class="line"># Install Jekyll and Bundler gems</span><br><span class="line">$ sudo gem install jekyll bundler</span><br></pre></td></tr></table></figure>
+<p>然后在<code>gem install jekyll</code>时会报错：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">error: could not find a valid gem (&gt;= 0) in any repository</span><br></pre></td></tr></table></figure>
+<p>参考<a href="https://github.com/jekyll/jekyll/issues/1409" target="_blank" rel="noopener">github issues</a>，F*k GWF，需要将<code>https://rubygems.org/</code>换成其他可访问的镜像，如<a href="http://gems.ruby-china.org/" target="_blank" rel="noopener">Ruby China 镜像</a>。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ gem sources --remove https://rubygems.org/</span><br><span class="line">$ gem sources -a https://gems.ruby-china.org/</span><br><span class="line">$ gem sources -l</span><br><span class="line">*** CURRENT SOURCES ***</span><br><span class="line">https://gems.ruby-china.org/   </span><br><span class="line"># 确保只有 gems.ruby-china.org</span><br></pre></td></tr></table></figure>
+<p>重新尝试 install jekyll，还是报错：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">current directory: /var/lib/gems/2.4.0/gems/ffi-1.9.18/ext/ffi_c</span><br><span class="line">/usr/bin/ruby2.4 -r ./siteconf20170801-1836-1n75umz.rb extconf.rb</span><br><span class="line">mkmf.rb can&apos;t find header files for ruby at /usr/lib/ruby/include/ruby.h</span><br></pre></td></tr></table></figure>
+<p>解决方式：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo apt-get install ruby2.4-dev</span><br></pre></td></tr></table></figure>
+<p>之后就可以正常安装jekyll了。</p>
+<p>另外，根据<a href="http://gems.ruby-china.org/" target="_blank" rel="noopener">Ruby China 镜像</a>，你可以用 Bundler 的 <a href="http://bundler.io/v1.5/bundle_config.html#gem-source-mirrors" target="_blank" rel="noopener">Gem 源代码镜像命令</a>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ bundle config mirror.https://rubygems.org https://gems.ruby-china.org</span><br></pre></td></tr></table></figure>
+<p>这样就不用改你的 Gemfile 中的 source了。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">source &quot;https://rubygems.org&quot;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h3 id="Basic-Command"><a href="#Basic-Command" class="headerlink" title="Basic Command"></a>Basic Command</h3><p>用jekyll新建一个site:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ jekyll new myblog</span><br><span class="line">$ cd myblog</span><br><span class="line">$ bundle exec jekyll serve</span><br></pre></td></tr></table></figure>
+<p>打开<a href="http://localhost:4000测试。" target="_blank" rel="noopener">http://localhost:4000测试。</a></p>
+<p>默认使用的是<code>Minima theme</code>. 目前基于jekyll 3.x的themes还比较少。<br>因为我是自己新建的theme，就不用这样方式了。</p>
+<hr>
+<p>启动服务：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 启动服务</span><br><span class="line">$ jekyll serve</span><br><span class="line"></span><br><span class="line"># 启动服务(gem-based theme)</span><br><span class="line">$ bundle exec jekyll serve</span><br><span class="line"></span><br><span class="line"># 脱离终端在后台运行</span><br><span class="line"># 如果你想关闭服务器，可以使用`kill -9 1234`命令，&quot;1234&quot; 是进程号（PID）。</span><br><span class="line"># 如果你找不到进程号，那么就用`ps aux | grep jekyll`命令来查看，然后关闭服务器。</span><br><span class="line">$ jekyll serve --detach</span><br><span class="line"></span><br><span class="line"># 和jekyll serve相同，但是会查看变更并且自动再生成。</span><br><span class="line">$ jekyll serve --watch</span><br></pre></td></tr></table></figure>
+<p>生成静态页面（位于<code>_site</code>目录）：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ jekyll build</span><br></pre></td></tr></table></figure>
+<p>或者用：(watched for changes, and regenerated automatically.)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ jekyll build --watch</span><br></pre></td></tr></table></figure>
+<h1 id="Set-up-Your-Site-on-VPS"><a href="#Set-up-Your-Site-on-VPS" class="headerlink" title="Set up Your Site on VPS"></a>Set up Your Site on VPS</h1><p>网上清一色都是通过github pages来发布的站点，然后通过修改<code>CNAME</code>文件来达到绑定域名的目的。</p>
+<p>我这里是放到VPS上，需要自己搭建web server环境。</p>
+<blockquote>
+<p>Jekyll is a static site generator, not a webserver. You may generate the static files and serve with webserver like <code>nginx</code>, which provides such abilities.</p>
+</blockquote>
+<p>参考：</p>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-get-started-with-jekyll-on-an-ubuntu-vps" target="_blank" rel="noopener">How To Get Started with Jekyll on an Ubuntu VPS</a></li>
+<li><a href="https://thomasroest.com/2016/11/05/set-up-a-jekyll-site-on-a-vps-with-ubuntu-nginx-and-letsencrypt.html" target="_blank" rel="noopener">Set up a Jekyll site on a vps with Ubuntu, Nginx and Letsencrypt</a></li>
+</ul>
+<p>因为是静态网站，所以Jekyll其实安装在本地就可以，静态页面也放在本地。然后将Jekyll生成的静态HTML文件（<code>_site</code>目录下）通过类似FTP的方式上传到VPS就行。</p>
+<p>将本地数据上传到远程服务用<code>scp</code>就行，后来了解到<code>rsync</code>这个命令。<code>rsync</code>只传送两个文件的不同部分，而不是每次都整份传送，因此速度很快。</p>
+<p>先来理清关系：</p>
+<ul>
+<li><a href="http://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a> for write our content</li>
+<li><a href="http://nginx.org/en/" target="_blank" rel="noopener">nginx</a> to serve our content</li>
+<li><a href="http://www.capistranorb.com/" target="_blank" rel="noopener">Capistrano</a> to deploy</li>
+</ul>
+<h2 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get install nginx</span><br><span class="line">sudo service nginx start</span><br></pre></td></tr></table></figure>
+<p>然后输入vps地址就能看到nginx的欢迎页面。</p>
+<p>查看运行状态：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo service nginx status</span><br><span class="line"># 显示：</span><br><span class="line">- nginx is running</span><br></pre></td></tr></table></figure>
+<p>修改 nginx 配置：sudo vim /etc/nginx/sites-enabled/default</p>
+<p>将 <code>root /usr/share/nginx/html;</code> 注释掉，改为 <code>root /home/deploy/your_blog_name/_site</code>。</p>
+<p>将 <code>server_name localhost;</code> 注释掉，改为 <code>server_name your_domain.com;</code>。</p>
+<p>重新启动nginx，就能看到建的blog内容了。</p>
+<h2 id="Capistrano"><a href="#Capistrano" class="headerlink" title="Capistrano"></a>Capistrano</h2><p>Capistrano 是一个 Ruby 程序，参考第一个文章链接，它可以通过Git复制代码到服务器等操作。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo gem install capistrano</span><br></pre></td></tr></table></figure>
+<p>这里先存留吧，暂时还没用到Capistrano。</p>
+<p>目前是按照<a href="http://blog.lszero.com/coding4fun/multisite-setting.html" target="_blank" rel="noopener">利用Apache进行多站点配置</a>设置的。</p>
+<h1 id="Create-New-Theme-From-Scratch"><a href="#Create-New-Theme-From-Scratch" class="headerlink" title="Create New Theme From Scratch"></a>Create New Theme From Scratch</h1><p>既然是from scratch，就先把jekyll的目录结构理清，然后借助bootstrap框架创建主题，最后就是各种features了。</p>
+<h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><h3 id="Directory-Structure"><a href="#Directory-Structure" class="headerlink" title="Directory Structure"></a>Directory Structure</h3><p>用<code>jekyll new-theme xxx</code>命令，就可以创建出一个theme需要的基本目录项。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── _drafts</span><br><span class="line">|   ├── begin-with-the-crazy-ideas.textile</span><br><span class="line">|   └── on-simplicity-in-technology.markdown</span><br><span class="line">├── _includes</span><br><span class="line">|   ├── footer.html</span><br><span class="line">|   └── header.html</span><br><span class="line">├── _layouts</span><br><span class="line">|   ├── default.html</span><br><span class="line">|   ├── post.html</span><br><span class="line">├── _posts</span><br><span class="line">|   ├── 2007-10-29-why-every-programmer-should-play-nethack.textile</span><br><span class="line">|   └── 2009-04-26-barcamp-boston-4-roundup.textile</span><br><span class="line">├── _data</span><br><span class="line">|   └── members.yml</span><br><span class="line">├── _site</span><br><span class="line">└── index.html</span><br></pre></td></tr></table></figure>
+<p>说明：</p>
+<p><code>_config.yml</code> 是配置文件。默认配置参见：<a href="https://jekyllrb.com/docs/configuration/#default-configuration" target="_blank" rel="noopener">https://jekyllrb.com/docs/configuration/#default-configuration</a></p>
+<p><code>_includes</code> 里的文件为了布局重用。</p>
+<p><code>_layouts</code> 站点布局模板。布局可以在 <a href="http://jekyll.com.cn/docs/frontmatter/" target="_blank" rel="noopener">YAML 头信息</a>中根据不同文章进行选择。 </p>
+<p><code>_posts</code> 将md文件以<code>2017-08-01-welcome-to-jekyll.md</code>的格式放到该目录中。</p>
+<p><code>_drafts</code> 中的md文件直接以<code>title.md</code>命名，并不会发布出来。当运行<code>jekyll serve</code>或者<code>jekyll build --drafts</code>时，草稿文章会被加上日期值并发布出来。</p>
+<p><code>_site</code> 存放jekyll转化完成的html文件。有时修改效果不生效，可以尝试删除该目录。</p>
+<h3 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h3><p>自带的变量详见：<a href="http://jekyllrb.com/docs/variables/" target="_blank" rel="noopener">Variables</a>。</p>
+<p>或者通过<code>_config.yml</code>添加。</p>
+<h3 id="Need-to-Know"><a href="#Need-to-Know" class="headerlink" title="Need to Know"></a>Need to Know</h3><p>若在<code>index.html</code>的YAML头信息中加入：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">layout: default</span><br><span class="line">...</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>则在<code>default.html</code>中调用`{{ content }}`时，就会把<code>index.html</code>中的所有内容放到调用处。</p>
+<h2 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h2><p>Bootstrap前端框架真是我这种前端白痴的福音。</p>
+<p>下载<a href="https://github.com/twbs/bootstrap/releases/download/v3.3.7/bootstrap-3.3.7-dist.zip" target="_blank" rel="noopener">Bootstrp</a>，我这里将解压后的文件放到了<code>assets/bootstrap-3.3.7-dist</code> 目录下。</p>
+<p>使用Bootstrap：</p>
+<p>参考Bootstrap官网里给的<a href="http://getbootstrap.com/getting-started/#template" target="_blank" rel="noopener">基本HTML模板</a>，</p>
+<p>（1）将下面这行代码改成自己的相应路径后，放到<code>head.html</code> 的<code>&lt;head&gt;&lt;/head&gt;</code> 标签中。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Bootstrap --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"/assets/bootstrap-3.3.7-dist/css/bootstrap.min.css"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>（2）将下两行改成自己的相应路径后，放到<code>default.html</code> 的<code>&lt;body&gt;&lt;/body&gt;</code> 标签中的最下方，为了最后加载。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- jQuery (necessary for Bootstrap's JavaScript plugins) --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- Include all compiled plugins (below), or include individual files as needed --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/assets/bootstrap-3.3.7-dist/js/bootstrap.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>若没效果，删除 <code>_site</code> 目录再试试，或者用命令重新 build。</p>
+<h3 id="NavBar"><a href="#NavBar" class="headerlink" title="NavBar"></a>NavBar</h3><p>参考Bootstrap官网给的<a href="http://getbootstrap.com/components/#navbar" target="_blank" rel="noopener">示例代码</a>，写入<code>header.html</code>文件中。</p>
+<p>然后在<code>default.html</code>的<code>&lt;body&gt;&lt;/body&gt;</code>标签中引入`{% include header.html %}`。</p>
+<p>注意的点是，</p>
+<p>若使用了<code>.navbar-fixed-top</code> 类，这个固定的导航条会遮住页面上的其它内容，除非你给 <code>&lt;body&gt;</code> 元素底部设置了 <code>padding</code>，例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">body &#123; padding-top: 70px; &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><h3 id="Post-Excerpt"><a href="#Post-Excerpt" class="headerlink" title="Post Excerpt"></a>Post Excerpt</h3><p>在<code>index.html</code> 中显示文章摘要。参见<a href="https://jekyllrb.com/docs/posts/#post-excerpts" target="_blank" rel="noopener">https://jekyllrb.com/docs/posts/#post-excerpts</a>。</p>
+<p>（1）自带的`{{ post.excerpt }}` 会自动取第一段的内容作为摘要。</p>
+<p>若想自定义，</p>
+<p>（2）在<code>_config.yml</code> 文件中指定摘要的分隔符：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">excerpt_separator: &lt;!-- more --&gt;</span><br></pre></td></tr></table></figure>
+<p>这样会覆盖自带的`{{ post.excerpt }}`功能，然后在文章内容需要分隔的摘要后面加上<code>&lt;!-- more --&gt;</code>。而<code>&lt;!-- more --&gt;</code> 本身作为注释，不会影响 markdown 的显示。</p>
+<p>（3）或者采用这样的方式：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% raw %&#125;&#123;&#123; post.content | strip_html | truncatewords:75 &#125;&#125;&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Pagination"><a href="#Pagination" class="headerlink" title="Pagination"></a>Pagination</h3><p>用于<code>index.html</code> 里对文章的分页显示功能。</p>
+<p>（1）首先安装<code>jekyll-paginate</code>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo gem install jekyll-paginate</span><br></pre></td></tr></table></figure>
+<p>在配置文件<code>_config.yml</code>中添加：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">plugins:</span><br><span class="line">  - jekyll-paginate</span><br><span class="line">paginate: 5</span><br><span class="line">paginate_path: &quot;/pages:num/&quot;</span><br></pre></td></tr></table></figure>
+<p>其中，<code>paginate: 5</code> 设置的是分页数；<br><code>paginate_path: &quot;/pages:num/&quot;</code> 设置的是URL的显示格式，如 <a href="http://localhost:4000/pages2/。" target="_blank" rel="noopener">http://localhost:4000/pages2/。</a></p>
+<p>（2）然后参考<a href="https://jekyllrb.com/docs/pagination/" target="_blank" rel="noopener">https://jekyllrb.com/docs/pagination/</a>在<code>index.html</code>添加分页功能，并结合Bootstrap里的分页样式修改：<a href="http://getbootstrap.com/components/#pagination" target="_blank" rel="noopener">http://getbootstrap.com/components/#pagination</a>。</p>
+<h3 id="SideBar"><a href="#SideBar" class="headerlink" title="SideBar"></a>SideBar</h3><p>这里利用了 bootstrap 的栅格布局，栅格布局将一个页面分割成12个等宽的列。(详见 <a href="http://getbootstrap.com/css/#grid-example-basic" target="_blank" rel="noopener">example</a>)</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row-fluid"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-md-9"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Content<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-md-3"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Sidebar<span class="tag">&lt;/<span class="name">h2</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>让侧边栏固定住，不随页面滚动而滚动：加入<code>class=&quot;affix&quot;</code>。</p>
+<hr>
+<p><strong>说明：</strong></p>
+<p>我这里设置两种sidebar：</p>
+<ul>
+<li>一种是<code>index.html</code>里的，用于显示author信息，写在<code>main_sidebar.html</code>中；</li>
+<li>另一种是<code>post</code>对应的，用于显示目录列表，写在<code>post_sidebar.html</code>中。</li>
+</ul>
+<hr>
+<h3 id="Social-Icons"><a href="#Social-Icons" class="headerlink" title="Social Icons"></a>Social Icons</h3><p>icons用的是 <a href="http://fontawesome.io/" target="_blank" rel="noopener">fontawesome</a>。我这里将解压后的 <code>fonts</code>和<code>css</code>文件夹复制到了<code>assets</code>目录下。</p>
+<p>在<code>head.html</code>中添加：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"/assets/css/font-awesome.min.css"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>要使用哪个图标，直接去<a href="http://fontawesome.io/icons/" target="_blank" rel="noopener">官网</a>搜代码就行。</p>
+<p>修改图标颜色，因为其本身就是一种字体，故使用<code>color</code>修改即可。</p>
+<p>修改图标大小也是，用<code>font-size</code>即可，或者：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"fa fa-camera-retro"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"fa fa-camera-retro fa-2x"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"fa fa-camera-retro fa-3x"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>对官网搜不到的社交网站图标怎么办，如“知乎”的：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&#123;&#123; site.social_media.zhihu_url &#125;&#125;"</span> <span class="attr">class</span>=<span class="string">"btn"</span> <span class="attr">title</span>=<span class="string">"Zhihu"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"fa-stack fa-lg"</span>&gt;</span><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"fa fa-circle fa-stack-2x"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"fa fa-stack-1x fa-inverse"</span>&gt;</span>知<span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Table-of-Content"><a href="#Table-of-Content" class="headerlink" title="Table of Content"></a>Table of Content</h3><h4 id="post中显示目录"><a href="#post中显示目录" class="headerlink" title="post中显示目录"></a>post中显示目录</h4><p>kramdown自带了解析目录的功能。详见：<a href="https://kramdown.gettalong.org/converter/html.html#toc" target="_blank" rel="noopener">https://kramdown.gettalong.org/converter/html.html#toc</a></p>
+<p>在md文件中加入：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 无序列表</span><br><span class="line">* TOC</span><br><span class="line">&#123;:toc&#125;</span><br><span class="line">&#123;: .this-is-my-class&#125;</span><br></pre></td></tr></table></figure>
+<p>或者：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 有序列表</span><br><span class="line">1. TOC</span><br><span class="line">&#123;:toc&#125;</span><br><span class="line">&#123;: .this-is-my-class&#125;</span><br></pre></td></tr></table></figure>
+<p>并且可在<code>_config.yml</code>中设置要显示的标题级别：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kramdown: </span><br><span class="line">  toc_levels: &quot;2,3&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="sidebar中显示目录"><a href="#sidebar中显示目录" class="headerlink" title="sidebar中显示目录"></a>sidebar中显示目录</h4><p>侧边栏目录随浏览内容动态滚动功能，利用Bootstrap的<a href="http://getbootstrap.com/javascript/#scrollspy" target="_blank" rel="noopener">Scrollspy</a>来实现。</p>
+<ul>
+<li>参考 <a href="http://www.thomaszhao.cn/2015/01/08/how-do-i-build-this-jekyll-blog/#toctable-of-content-" target="_blank" rel="noopener">application.js</a> 获取目录结构，和标题滚动效果。</li>
+<li>参考 <a href="https://www.mywpku.com/jquery-pin-elements.html" target="_blank" rel="noopener">JQUERY实现侧边栏随滚动条滚动并固定位置</a> 来固定sidebar的位置，并且效果是：当滚动到指定模块时才置顶该模块。</li>
+</ul>
+<p>最后写了个 <a href="https://github.com/lszero/lszero.github.io/blob/master/assets/js/toc/TOC.js" target="_blank" rel="noopener">TOP.js</a> 终于实现得还算满意了。（当然，还要配合 css 使用）</p>
+<p>另外，其它不错的实现：</p>
+<ul>
+<li><a href="https://afeld.github.io/bootstrap-toc/" target="_blank" rel="noopener">bootstrap-toc</a> (<a href="https://github.com/afeld/bootstrap-toc/tree/gh-pages/dist" target="_blank" rel="noopener">github</a>)</li>
+<li><a href="http://gregfranko.com/jquery.tocify.js/" target="_blank" rel="noopener">Tocify plugin</a></li>
+<li><a href="http://projects.jga.me/toc/" target="_blank" rel="noopener">TOC plugin</a></li>
+</ul>
+<h4 id="Hide-sidebar-for-mobile-display"><a href="#Hide-sidebar-for-mobile-display" class="headerlink" title="Hide sidebar for mobile display"></a>Hide sidebar for mobile display</h4><p>手机显示时，隐藏侧边栏，否则会显示混乱。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">@<span class="keyword">media</span> (max-width: <span class="number">800px</span>) &#123;</span><br><span class="line">    <span class="selector-id">#sidebar</span> &#123;</span><br><span class="line">        <span class="attribute">display</span>:none <span class="meta">!important</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Search"><a href="#Search" class="headerlink" title="Search"></a>Search</h3><p>参考：<a href="http://getbootstrap.com/components/#input-groups-buttons" target="_blank" rel="noopener">Button addons</a> &amp; <a href="http://getbootstrap.com/components/#navbar-forms" target="_blank" rel="noopener">Forms</a></p>
+<p>将下面代码加入<code>header.html</code>中：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">class</span>=<span class="string">"navbar-form navbar-left"</span> <span class="attr">role</span>=<span class="string">"search"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"input-group"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"input-group-btn"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn btn-default"</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span>Go!<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">placeholder</span>=<span class="string">"Search"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>对于search逻辑，目前还没找到一个很好的方式去实现。。。（如果知道的，麻烦告诉我一声！）</p>
+<h3 id="Back-to-Top"><a href="#Back-to-Top" class="headerlink" title="Back to Top"></a>Back to Top</h3><p>该功能我放在了<code>post_sidebar.html</code>中：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#top"</span> <span class="attr">class</span>=<span class="string">"back-to-top"</span>&gt;</span>^<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其实就是个link，最后再用css设置样式。</p>
+<hr>
+<p>更新：</p>
+<p>为了不让footer覆盖掉 back-to-top，只能把back-to-top写在footer后面。故改在了<code>default.html</code>里。</p>
+<h3 id="Comments"><a href="#Comments" class="headerlink" title="Comments"></a>Comments</h3><h4 id="Gitment"><a href="#Gitment" class="headerlink" title="Gitment"></a>Gitment</h4><p><a href="https://imsun.net/posts/gitment-introduction/" target="_blank" rel="noopener">Gitment</a> 挺不错的的。按照官网的说明引入js后，在其中修改自己的OAuth Application信息。</p>
+<h4 id="isso"><a href="#isso" class="headerlink" title="isso"></a>isso</h4><p>这是自建评论系统的一种方式。<a href="https://posativ.org/isso/" target="_blank" rel="noopener">官网</a>需要fq.</p>
+<p>我之后用的也是这种方法，详见：<a href="http://blog.lszero.com/coding4fun/comments-with-isso.html" target="_blank" rel="noopener">搭建Isso评论服务</a></p>
+<h3 id="Archives"><a href="#Archives" class="headerlink" title="Archives"></a>Archives</h3>`{% for post in paginator.posts %}` 并不能使用，因为paginator只会对<code>index.html</code>有效。<br><br><code>site.posts | size</code> 获取总的文章数。<br><br>因为jekyll不支持按日期获取，只能暂时用`{% for post in site.posts %}`。<br><br>这部分待补充吧。<br><br>### Category<br><br>参考 <a href="https://segmentfault.com/a/1190000000406017#articleHeader2" target="_blank" rel="noopener">使用Category分类</a>。<br><br>首先在每个文章的YAML头信息中定义类别，如：<br><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">layout: post</span><br><span class="line">title:  &quot;your title&quot;</span><br><span class="line">categories: Algorithm</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p><strong>获取所有类别：</strong></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&#123;% raw %&#125;&#123;% for category in site.categories %&#125;</span><br><span class="line">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span>&#123;&#123; category[0] &#125;&#125; (&#123;&#123; category[1].size &#125;&#125;)<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  &#123;% for post in category[1] %&#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;&#123; post.date | date:"%d/%m/%Y"&#125;&#125;<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&#123;&#123; post.url &#125;&#125;"</span>&gt;</span>&#123;&#123; post.title &#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  &#123;% endfor %&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">&#123;% endfor %&#125;&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+<p>使用：</p>
+<ul>
+<li><code>site.categories.size</code> 获取总的类别数。</li>
+<li><code>category[0]</code> 获取分类名称。</li>
+<li><code>category[1].size</code> 获取该分类下文章的数目。</li>
+<li><code>site.categories.CATEGORY</code> 可得到某个特定类别的所有文章。</li>
+</ul>
+<p>更多变量可参见：<a href="http://jekyllrb.com/docs/variables/#site-variables" target="_blank" rel="noopener">http://jekyllrb.com/docs/variables/#site-variables</a>.</p>
+<p>输出单个分类下的所有文章：</p>
+<p><code>site.categories.CATEGORY</code> 需要手动指定，并不是很方便。</p>
+<p><a href="https://segmentfault.com/a/1190000000406017#articleHeader2" target="_blank" rel="noopener">使用Category分类</a>这篇文章里使用js来实现。</p>
+<p>我这里是先生成好<code>categories.html</code>，里面列出了所有的文章。然后利用锚点<code>categories.html#xxx</code>进行跳转到指定的类别。</p>
+<h3 id="Tags"><a href="#Tags" class="headerlink" title="Tags"></a>Tags</h3><p>参考<a href="https://segmentfault.com/a/1190000000406017#articleHeader5" target="_blank" rel="noopener">使用文章标签索引文章</a>。</p>
+<p>首先在每个文章的YAML头信息中定义tags，如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">layout: post</span><br><span class="line">title:  &quot;your title&quot;</span><br><span class="line">tags: [github, jekyll]</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>和<a href="#category">category</a>的设置方法差不多，就不赘述了。</p>
+<h3 id="Latex"><a href="#Latex" class="headerlink" title="Latex"></a>Latex</h3><p>参考：<a href="https://jekyllrb.com/docs/extras/#math-support" target="_blank" rel="noopener">https://jekyllrb.com/docs/extras/#math-support</a></p>
+<p>我这里为了避免所有pages都引入mathjax相关js代码，采用了不同的设置：</p>
+<p>在配置文件<code>_config.yml</code>中添加：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mathjax: false</span><br></pre></td></tr></table></figure>
+<p>在<code>head.html</code>中添加：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&#123;% raw %&#125;&#123;% if page.mathjax %&#125;</span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">&#123;% endif %&#125;&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在需要引入mathjax的md文件头中加入<code>mathjax: true</code>，如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">layout: post</span><br><span class="line">...</span><br><span class="line">mathjax: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<h4 id="Support"><a href="#Support" class="headerlink" title="Support $"></a>Support $</h4><p>默认只支持双<code>$</code>符，修改：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/x-mathjax-config"</span>&gt;</span><br><span class="line">  MathJax.Hub.Config(&#123;</span><br><span class="line">    TeX: &#123;</span><br><span class="line">      equationNumbers: &#123;</span><br><span class="line">        autoNumber: <span class="string">"AMS"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    tex2jax: &#123;</span><br><span class="line">      inlineMath: [ [<span class="string">'$'</span>,<span class="string">'$'</span>] ],</span><br><span class="line">      displayMath: [ [<span class="string">'$$'</span>,<span class="string">'$$'</span>] ],</span><br><span class="line">      processEscapes: <span class="literal">true</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="Mathjax-Rendering-Problem"><a href="#Mathjax-Rendering-Problem" class="headerlink" title="Mathjax Rendering Problem"></a>Mathjax Rendering Problem</h4><p>若latex公式中包含<code>|</code>符，如<code>|a|</code>，会被markdown解析器当成<code>&lt;table&gt;&lt;/table&gt;</code>来处理。</p>
+<p>又如，定义矩阵时，其中的换行<code>\\</code>也会被解析出问题，把第一个<code>\</code>当成了转义符。</p>
+<p>解决方式：</p>
+<p>对第一种情况，根据 <a href="https://kramdown.gettalong.org/syntax.html#math-blocks" target="_blank" rel="noopener">Syntax | Kramdown</a> 上的说明，将<code>|</code>用<code>\vert</code>来代替。</p>
+<p>对第二种情况，用双<code>$$</code>符解决转义问题。</p>
+<h3 id="Code-Highlighting"><a href="#Code-Highlighting" class="headerlink" title="Code Highlighting"></a>Code Highlighting</h3><p>Jekyll 3.x 自带了rouge代码高亮的功能，但是不造为啥一直not working（难道又被看脸了。。</p>
+<p>于是这里用的是<a href="https://highlightjs.org/" target="_blank" rel="noopener">highlightjs</a>。在<code>head.html</code>里添加：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"/lib/highlight/styles/hybrid.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/lib/highlight/highlight.pack.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined">hljs.initHighlightingOnLoad();</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我这里把下载的<code>highlightjs</code>的相关文件放在了<code>lib</code>目录下，样式选的是<code>hybrid.css</code>。（monokai-sublime 和 hybrid 配色也不错。）</p>
+<p><code>highlightjs</code>会解析并高亮<code>&lt;pre&gt;&lt;code&gt;...&lt;/code&gt;&lt;/pre&gt;</code>中的内容。如</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pre</span>&gt;</span><span class="tag">&lt;<span class="name">code</span> <span class="attr">class</span>=<span class="string">"html"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">code</span>&gt;</span><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>若不需要高亮则设为：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pre</span>&gt;</span><span class="tag">&lt;<span class="name">code</span> <span class="attr">class</span>=<span class="string">"nohighlight"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">code</span>&gt;</span><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里有个麻烦的地方，若md里没有指明语言，<code>highlightjs</code>也会自动检测是什么语言。如果不想对某个code block进行高亮，有两种解决方式：（当然了，我比较折腾，一般人也不需要这个。。（捂脸）</p>
+<p>（1）每次手动加入<code>nohighlight</code>。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">​```nohighlight</span><br><span class="line">xxx</span><br><span class="line">​</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">（2）修改markdown解析器。</span><br><span class="line"></span><br><span class="line">第一种方式比较麻烦，但`highlightjs`又没有提供关闭`highlightAuto`的接口。</span><br><span class="line"></span><br><span class="line">### Custom Markdown Parser</span><br><span class="line"></span><br><span class="line">在`_config.yml`中可以看到，默认使用的是`kramdown`解析器。</span><br></pre></td></tr></table></figure>
+<p>markdown: kramdown<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">关于[Custom Markdown Processors](https://jekyllrb.com/docs/configuration/#custom-markdown-processors)官网有一些说明，好吧，没看懂，毕竟不会Ruby。kramdown也不能以overwrited的方式改写相应的convert方法，然后又写了段js代码试图修改kramdown解析出的html，但还是没成功。真是艰辛，网上找了好久都无果，最后还不如直接看代码改来得快。。。</span><br><span class="line"></span><br><span class="line">好在`highlightjs`提供了这个：</span><br><span class="line"></span><br><span class="line">```js</span><br><span class="line">// ignore languages</span><br><span class="line">&lt;script&gt;hljs.configure(&#123; ignore: [&apos;text&apos;] &#125;);&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>然后看Jekyll源码，找到了 <code>jekyll/lib/jekyll/converters/markdown/kramdown_parser.rb</code> (see <a href="https://github.com/jekyll/jekyll/blob/57fd5f887da1189a16bdfbb982d75f725c38d725/lib/jekyll/converters/markdown/kramdown_parser.rb" target="_blank" rel="noopener">code</a>) </p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">convert</span><span class="params">(content)</span></span></span><br><span class="line">  Kramdown::Document.new(content, @config).to_html</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>接着看kramdown源码，找到了<code>kramdown/lib/kramdown/converter/html.rb</code> (see <a href="https://github.com/gettalong/kramdown/blob/f4cdae257159ce0addf542739fed262e4a2cf401/lib/kramdown/converter/html.rb" target="_blank" rel="noopener">code</a>) </p>
+<p>在我的本地电脑中，相关文件位于<code>/usr/local/lib/ruby/gems/2.4.0/gems/kramdown-1.14.0/lib/kramdown/converter/html.rb</code>。</p>
+<p>找到<code>def convert_codeblock(el, indent)</code>函数进行修改：</p>
+<p>在代码<code>code_attr[&#39;class&#39;] = &quot;language-#{lang}&quot; if lang</code> 前添加：</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> lang.<span class="literal">nil</span>?</span><br><span class="line">  lang = <span class="string">"text"</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>并将代码<code>if highlighted_code</code> 改为 <code>if highlighted_code &amp;&amp; lang</code>。</p>
+<p>（其中，<code>nil</code>是判空的意思。）</p>
+<p>这样在不指明语言的时候，不高亮显示。</p>
+<hr>
+<p>上面是mac环境下，可以直接改代码。但是在linux环境下，只有一个二进制执行文件。</p>
+<p>于是，先删除原有的：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo gem uninstall kramdown</span><br></pre></td></tr></table></figure>
+<p>然后在官网<a href="https://github.com/gettalong/kramdown/releases" target="_blank" rel="noopener">下载源码</a>重新安装：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ ruby setup.rb config</span><br><span class="line">$ ruby setup.rb setup</span><br><span class="line">$ ruby setup.rb install</span><br></pre></td></tr></table></figure>
+<p>好吧，暂时没弄好。。。</p>
+<h2 id="Else"><a href="#Else" class="headerlink" title="Else"></a>Else</h2><h3 id="Permalinks"><a href="#Permalinks" class="headerlink" title="Permalinks"></a>Permalinks</h3><p>在<code>_config.yml</code>中设置，如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">permalink: /:categories/:year/:month/:day/:title.html</span><br></pre></td></tr></table></figure>
+<h3 id="footer"><a href="#footer" class="headerlink" title="footer"></a>footer</h3><p>当页面内容长度不够时，footer显示位置可能有问题。</p>
+<p>让footer内容永远处于最末端：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">$height-footer: 40px;</span><br><span class="line"></span><br><span class="line">html &#123;</span><br><span class="line">    height: 100%;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">body &#123;</span><br><span class="line">    min-height: 100%;</span><br><span class="line">    position: relative;</span><br><span class="line">    padding-bottom: $height-footer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.footer &#123;</span><br><span class="line">    bottom: 0;</span><br><span class="line">    width: 100%;</span><br><span class="line">    position: absolute;</span><br><span class="line">    height: $height-footer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>子元素的百分比高度也可以基于父元素的百分比高度，前提是父元素的父元素必须有一个明确的高度。要使<code>min-height</code>的百分比值生效，其父元素的<code>height</code>值必须为一个固定的高度或者是一个有效的百分比高度。</p>
+<h2 id="Problems"><a href="#Problems" class="headerlink" title="Problems"></a>Problems</h2>`{{ xxx }}` 或者 `{% xxx %}` 显示不出来。<br><br>解决方式：<br><br>（1）<br><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\&#123;\&#123; xxx \&#125;\&#125;</span><br></pre></td></tr></table></figure>
+<p>（2）参考：<a href="https://stackoverflow.com/questions/24102498/escaping-double-curly-braces-inside-a-markdown-code-block-in-jekyll" target="_blank" rel="noopener">Escaping double curly braces inside a markdown code block in Jekyll</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% assign openTag = &apos;&#123;%&apos; %&#125;&#123;&#123; openTag &#125;&#125; raw %&#125;    </span><br><span class="line">This is a test: &#123;% raw %&#125;&#123;&#123; xxx &#125;&#125;&#123;% endraw %&#125;</span><br><span class="line">&#123;&#123; openTag &#125;&#125; endraw %&#125;</span><br></pre></td></tr></table></figure>
+<p>（3）那么问题又来了，如何显示上面的 raw 和 endraw 呢？参考：<a href="http://www.cnblogs.com/OceanHeaven/p/6959669.html" target="_blank" rel="noopener">jekyll 如何转义字符</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen [::]:80;</span><br><span class="line">    server_name comments.lszero.com;</span><br><span class="line">    </span><br><span class="line">    location /isso &#123;</span><br><span class="line">        proxy_pass http://localhost:8090;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_set_header Host $host;</span><br><span class="line">        proxy_set_header X-Forwarded-Proto $scheme;</span><br><span class="line">        proxy_set_header X-Script-Name /isso;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </section>
+    </article>
+    
+        <!-- disqus 评论框 start -->
+        <div class="comment">
+            <div id="disqus_thread" class="disqus-thread">
+              <i>加载评论框需要翻墙</i>
+            </div>
+        </div>
+        <!-- disqus 评论框 end -->
+    
+    
+        <!-- livere 评论框 start -->
+        <div class="comment">
+            <div id="lv-container" data-id="city" data-uid="your_livere_uid"></div>
+        </div>
+        <!-- livere 评论框 end -->
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo"><span class="toc-number">1.</span> <span class="toc-text">Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Jekyll"><span class="toc-number">2.</span> <span class="toc-text">Jekyll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Get-Started"><span class="toc-number">3.</span> <span class="toc-text">Get Started</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Installation"><span class="toc-number">3.1.</span> <span class="toc-text">Installation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic-Command"><span class="toc-number">3.2.</span> <span class="toc-text">Basic Command</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Set-up-Your-Site-on-VPS"><span class="toc-number"></span> <span class="toc-text">Set up Your Site on VPS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx"><span class="toc-number">1.</span> <span class="toc-text">Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Capistrano"><span class="toc-number">2.</span> <span class="toc-text">Capistrano</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Create-New-Theme-From-Scratch"><span class="toc-number"></span> <span class="toc-text">Create New Theme From Scratch</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Basic"><span class="toc-number">1.</span> <span class="toc-text">Basic</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Directory-Structure"><span class="toc-number">1.1.</span> <span class="toc-text">Directory Structure</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Variables"><span class="toc-number">1.2.</span> <span class="toc-text">Variables</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Need-to-Know"><span class="toc-number">1.3.</span> <span class="toc-text">Need to Know</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bootstrap"><span class="toc-number">2.</span> <span class="toc-text">Bootstrap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NavBar"><span class="toc-number">2.1.</span> <span class="toc-text">NavBar</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Features"><span class="toc-number">3.</span> <span class="toc-text">Features</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Post-Excerpt"><span class="toc-number">3.1.</span> <span class="toc-text">Post Excerpt</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pagination"><span class="toc-number">3.2.</span> <span class="toc-text">Pagination</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SideBar"><span class="toc-number">3.3.</span> <span class="toc-text">SideBar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Social-Icons"><span class="toc-number">3.4.</span> <span class="toc-text">Social Icons</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Table-of-Content"><span class="toc-number">3.5.</span> <span class="toc-text">Table of Content</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#post中显示目录"><span class="toc-number">3.5.1.</span> <span class="toc-text">post中显示目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sidebar中显示目录"><span class="toc-number">3.5.2.</span> <span class="toc-text">sidebar中显示目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Hide-sidebar-for-mobile-display"><span class="toc-number">3.5.3.</span> <span class="toc-text">Hide sidebar for mobile display</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Search"><span class="toc-number">3.6.</span> <span class="toc-text">Search</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Back-to-Top"><span class="toc-number">3.7.</span> <span class="toc-text">Back to Top</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Comments"><span class="toc-number">3.8.</span> <span class="toc-text">Comments</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Gitment"><span class="toc-number">3.8.1.</span> <span class="toc-text">Gitment</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#isso"><span class="toc-number">3.8.2.</span> <span class="toc-text">isso</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Archives"><span class="toc-number">3.9.</span> <span class="toc-text">Archives</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tags"><span class="toc-number">3.10.</span> <span class="toc-text">Tags</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Latex"><span class="toc-number">3.11.</span> <span class="toc-text">Latex</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Support"><span class="toc-number">3.11.1.</span> <span class="toc-text">Support $</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Mathjax-Rendering-Problem"><span class="toc-number">3.11.2.</span> <span class="toc-text">Mathjax Rendering Problem</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Code-Highlighting"><span class="toc-number">3.12.</span> <span class="toc-text">Code Highlighting</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Else"><span class="toc-number">4.</span> <span class="toc-text">Else</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Permalinks"><span class="toc-number">4.1.</span> <span class="toc-text">Permalinks</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#footer"><span class="toc-number">4.2.</span> <span class="toc-text">footer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problems"><span class="toc-number">5.</span> <span class="toc-text">Problems</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+<!-- disqus 公共JS代码 -->
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES * * */
+  var disqus_shortname = "your_disqus_shortname";
+  var disqus_identifier = "http://yoursite.com/2017/08/01/static-website-with-jekyll/";
+  var disqus_url = "http://yoursite.com/2017/08/01/static-website-with-jekyll/";
+
+  isAgent(getDisqus)
+
+  // determine user agent in China
+  function isAgent(cb) {
+    var url = '//graph.facebook.com/feed?callback=h';
+    var xhr = new XMLHttpRequest();
+    var called = false;
+    xhr.open('GET', url);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+      called = true;
+      cb(true);
+      }
+    };
+    xhr.send();
+    // timeout 1s, this facebook API is very fast.
+    setTimeout(function() {
+      if (!called) {
+      xhr.abort();
+      cb(false)
+      }
+    }, 1000);
+  }
+
+  function getDisqus(isAgent) {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; 
+    dsq.async = true
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+  }
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+<script type="text/javascript">
+  (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+
+      if (typeof LivereTower === 'function') { return; }
+
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+
+      e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
