@@ -10,7 +10,7 @@
     <link rel="icon" href="/favicon.ico">
   
     
-  <title>Yongze.Chen Blogs</title>
+  <title>Yongze.Chen</title>
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -20,7 +20,7 @@
   <header>
   <div class="header-container">
     <a class='logo' href="/">
-      <span>Yongze.Chen Blogs</span>
+      <span>Yongze.Chen</span>
     </a>
     <ul class="right-header">
       
@@ -56,6 +56,166 @@
   <div class="posts-list">
     
       <section>
+        <a href="/2018/04/08/kafka-1/">
+          <h3 class='post-head'>
+            kafka消息队列-docker
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p>github pro:<a href="https://github.com/wurstmeister/kafka-docker" target="_blank" rel="noopener">kafka docker</a></p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年04月08日</time>
+          
+            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/kafka/">kafka</a>
+  </div>
+
+
+
+          
+          
+            <span class="seperator">|</span>
+             
+                <i class="fa fa-tag" aria-hidden="true"></i>
+              
+             
+  <a href="/tags/#kafka" class='tag'>kafka</a>
+
+
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2018/04/05/linux-ssh-1/">
+          <h3 class='post-head'>
+            Linux终端链接到远程服务器，如何设置链接超时断开时间
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">可以查看/etc/ssh/sshd_config文件，配置参数</span><br><span class="line"></span><br><span class="line">ClientAliveInterval 30     #每30秒向客户端请求消息</span><br><span class="line"></span><br><span class="line">ClientAliveCountMax 5      #连的人多就设大一点</span><br></pre></td></tr></table></figure>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年04月05日</time>
+          
+            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux-ssh/">linux ssh</a>
+  </div>
+
+
+
+          
+          
+            <span class="seperator">|</span>
+             
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+             
+  <a href="/tags/#linux" class='tag'>linux</a>
+
+  <a href="/tags/#ssh" class='tag'>ssh</a>
+
+
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2018/04/05/jekyll-js/">
+          <h3 class='post-head'>
+            jekyll
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <h3 id="发音"><a href="#发音" class="headerlink" title="发音"></a>发音</h3><p>英  [‘dʒekil; ‘dʒi:kil]<br>美  [‘dʒekil; ‘dʒi:kil]</p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年04月05日</time>
+          
+            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/jekyll/">jekyll</a>
+  </div>
+
+
+
+          
+          
+            <span class="seperator">|</span>
+             
+                <i class="fa fa-tag" aria-hidden="true"></i>
+              
+             
+  <a href="/tags/#jekyll" class='tag'>jekyll</a>
+
+
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2018/04/05/shell-push/">
+          <h3 class='post-head'>
+            shell 打包发布
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <h2 id="发布代码-服务器-linux"><a href="#发布代码-服务器-linux" class="headerlink" title="发布代码 服务器[ linux ]"></a>发布代码 服务器[ linux ]</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#author:yongze.chen</span><br><span class="line">WEBIP=&quot;114.215.xx.xx&quot;</span><br><span class="line">S_PATH=&quot;/data/excel/&quot;</span><br><span class="line">echo &quot; ========= start==== $WEBIP ====&quot;</span><br><span class="line">cd $S_PATH</span><br><span class="line">TAG_PACK=`date +%Y%m%d%s`-excel.tar.gz</span><br><span class="line">tar -zcvf  $TAG_PACK *</span><br><span class="line">echo &quot;========== scp $TAG_PACK========&quot;</span><br><span class="line">scp $TAG_PACK root@$&#123;WEBIP&#125;:$S_PATH</span><br><span class="line">rm $TAG_PACK</span><br><span class="line">ssh root@$WEBIP &quot;cd $&#123;S_PATH&#125; &amp;&amp; tar -zxvf $&#123;TAG_PACK&#125; &amp;&amp; rm $&#123;TAG_PACK&#125;&quot;</span><br><span class="line">echo &quot;=========== sucess ================&quot;</span><br></pre></td></tr></table></figure>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年04月05日</time>
+          
+            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/shell/">shell</a>
+  </div>
+
+
+
+          
+          
+            <span class="seperator">|</span>
+             
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+             
+  <a href="/tags/#ssh" class='tag'>ssh</a>
+
+  <a href="/tags/#shell" class='tag'>shell</a>
+
+
+          
+        </div>
+      </section>
+    
+      <section>
         <a href="/2018/04/05/go-learn/">
           <h3 class='post-head'>
             Golang 入学
@@ -66,7 +226,7 @@
           
             
               
-                <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go build</span><br></pre></td></tr></table></figure>
+                <h2 id="start"><a href="#start" class="headerlink" title="start"></a>start</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go build</span><br></pre></td></tr></table></figure>
               
           
         </div>
@@ -90,6 +250,42 @@
   <a href="/tags/#学习" class='tag'>学习</a>
 
   <a href="/tags/#Go" class='tag'>Go</a>
+
+
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2018/04/05/python-zz/">
+          <h3 class='post-head'>
+            python 正则表达式
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年04月05日</time>
+          
+            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+
+
+          
+          
+            <span class="seperator">|</span>
+             
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+             
+  <a href="/tags/#学习" class='tag'>学习</a>
+
+  <a href="/tags/#python" class='tag'>python</a>
 
 
           
@@ -138,169 +334,18 @@
       </section>
     
       <section>
-        <a href="/2017/08/09/comments-with-isso/">
+        <a href="/2017/12/28/2017总结/">
           <h3 class='post-head'>
-            搭建Isso评论服务
+            2017总结
           </h3>
         </a>
         
         <div class="post-content">
           
-            <p>与其借助第三方服务天天担心挂，还不如将自己的服务器资源利用起来。<a href="https://posativ.org/isso/" target="_blank" rel="noopener">Isso</a>就是自建评论系统的一种方式。（官网需要fq.）</p>
-<h2 id="Install-Isso"><a href="#Install-Isso" class="headerlink" title="Install Isso"></a>Install Isso</h2><p>测试自Ubuntu服务器。本来官网文档里没那么多戏，但是我一直报错。。又安了很多其它包。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo apt-get install python3-dev</span><br><span class="line">$ sudo pip install isso</span><br><span class="line">$ sudo apt-get install sqlite3</span><br><span class="line"></span><br><span class="line"># 可能需要：</span><br><span class="line">$ sudo pip install werkzeug</span><br><span class="line">$ sudo apt-get install libffi-dev</span><br><span class="line">$ sudo pip install misaka</span><br></pre></td></tr></table></figure>
-          
         </div>
         <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2017年08月09日</time>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2017年12月28日</time>
           
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/coding4fun/">coding4fun</a>
-  </div>
-
-
-
-          
-          
-            <span class="seperator">|</span>
-             
-                <i class="fa fa-tags" aria-hidden="true"></i>
-              
-             
-  <a href="/tags/#jekyll" class='tag'>jekyll</a>
-
-  <a href="/tags/#blog" class='tag'>blog</a>
-
-
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/2017/08/08/multisite-setting/">
-          <h3 class='post-head'>
-            利用Apache进行多站点配置
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            <p>用了静态网页之后，主机就空闲了，当初辛辛苦苦跟工信部折腾了好几个月连案都备好了。。总感觉特别亏（其实就是舍不得wordpress的搜索功能。。）转念一想，拿wp当图片上传服务也是不错啊，这样就省去找第三方图床了。</p>
-<p>我的目标：</p>
-<ul>
-<li><a href="http://www.lszero.com" target="_blank" rel="noopener">www.lszero.com</a> 显示主页面。</li>
-<li>blog.lszero.com 对应静态site。</li>
-<li>wp.lszero.com 对应wordpress。</li>
-</ul>
-<p>我这里用的是apache来实现的，也可以用nginx。</p>
-<p>因为我的测试平台是Ubuntu，故跟网上的配置文件有些不一样。如网上说的apache配置文件<code>http.conf</code>，在我的平台下是<code>/etc/apache2/apache2.conf</code>。
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2017年08月08日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/coding/">coding</a>
-  </div>
-
-
-
-          
-          
-            <span class="seperator">|</span>
-             
-                <i class="fa fa-tags" aria-hidden="true"></i>
-              
-             
-  <a href="/tags/#jekyll" class='tag'>jekyll</a>
-
-  <a href="/tags/#blog" class='tag'>blog</a>
-
-  <a href="/tags/#multisites" class='tag'>multisites</a>
-
-
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/2017/08/01/static-website-with-jekyll/">
-          <h3 class='post-head'>
-            从WordPress到静态网站
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            <p>作为一个极简主义者，越来越受不了WordPress的臃肿。主要自己平时都是用Markdown来做记录，而WordPress支持的不是很好，另外有时写的md长文通过三方软件导出的html也不造放在wp的什么地方才合适，管理起来还不如几个静态页面来得方便。于是有了某天来个大整顿的想法。</p>
-<p>对前端只停留在css的我，花了整三天时间，从Hexo到Jekyll再到Bootstrap，以及各种markdown2html解析器…最后基本算是从头写了一个基于Jekyll的website theme 😓  在此记录了各种前端坑，自认为还算详细吧。
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2017年08月01日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/coding4fun/">coding4fun</a>
-  </div>
-
-
-
-          
-          
-            <span class="seperator">|</span>
-             
-                <i class="fa fa-tags" aria-hidden="true"></i>
-              
-             
-  <a href="/tags/#jekyll" class='tag'>jekyll</a>
-
-  <a href="/tags/#github" class='tag'>github</a>
-
-  <a href="/tags/#bootstrap" class='tag'>bootstrap</a>
-
-
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/2015/12/31/me-20151231/">
-          <h3 class='post-head'>
-            2015总结
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <p> 1、 请简述你这一年的工作内容，业绩数据回顾</p>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2015年12月31日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/生活/">生活</a>
-  </div>
-
-
-
-          
-          
-            <span class="seperator">|</span>
-             
-                <i class="fa fa-tag" aria-hidden="true"></i>
-              
-             
-  <a href="/tags/#年终总结" class='tag'>年终总结</a>
-
-
           
         </div>
       </section>
@@ -315,7 +360,7 @@
           文章分类
         </h1>
         <div class="content">
-          <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/centos/">centos</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/coding4fun/">coding4fun</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/jekyll/">jekyll</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/kafka/">kafka</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux-ssh/">linux ssh</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ngrok/">ngrok</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ngrok/内网穿透/">内网穿透</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/zsh/">zsh</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/">小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a></li></ul>
+          <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/centos/">centos</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/coding4fun/">coding4fun</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/jekyll/">jekyll</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/kafka/">kafka</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux-ssh/">linux ssh</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ngrok/">ngrok</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ngrok/内网穿透/">内网穿透</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/">小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a></li></ul>
         </div>
       </div>
     
@@ -330,6 +375,10 @@
       <a href="/">上一页</a>
     </div>
     
+    
+    <div class='page-next'>
+      <a href="/page/3/">下一页</a>
+    </div>
     
   </div>
 </div>
