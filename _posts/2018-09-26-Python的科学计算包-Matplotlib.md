@@ -51,4 +51,5 @@ pip3 install app.py
 
 效果
 
-<img src="/img/Figure__xxx_1.png" width="500" hegiht="500" align=center />
+
+![](https://chenyongze.github.io/assets/Figure__xxx_1.png)
