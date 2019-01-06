@@ -7,9 +7,6 @@ tags: Golang beego
 author: 朋也
 ---
 
-* content
-{:toc}
-
 [beego官网](http://beego.me)
 beego作为一个golang的web框架，入门非常的简单，既然要开发网站就少不了视图模板
 

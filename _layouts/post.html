@@ -8,7 +8,7 @@ layout: default
         <h3>{{ page.title }}</h3>
         <small>
           <span class="item">
-            <i class="fa fa-calendar-check-o"></i> {{page.date | date: '%F'}}
+            <i class="fa fa-calendar-check-o"></i> {{page.date | date: '%F %H:%M:%S'}}
           </span>
           {% if page.author %}
           <span class="item">

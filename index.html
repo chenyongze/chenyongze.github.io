@@ -9,7 +9,7 @@ layout: default
           <h3><a href="{{ post.url | prepend: site.baseurl }}" class="title">{{ post.title }}</a></h3>
           <small>
             <span class="item">
-              <i class="fa fa-calendar-check-o"></i> {{post.date | date: '%F'}}
+              <i class="fa fa-calendar-check-o"></i> {{post.date | date: '%F %H:%M:%S'}}
             </span>&nbsp;
             {% if post.author %}
               <span class="item">
