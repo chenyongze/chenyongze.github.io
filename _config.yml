@@ -15,7 +15,12 @@ permalink: /:year/:month/:day/:title/
 excerpt_separator: "\n\n\n\n"
 
 # 评论组件
-disqus_shortname: tomoya
+disqus_shortname:
+
+#gitment
+comment_gitment_repo: chenyongze.github.io
+comment_gitment_clientId: c611d25949fe5d1e71f2
+comment_gitment_clientSecret: c69b9c6f2c49fc1f6dbc782e536044391b02459a
 
 # statistic analysis 统计代码
 baidu_tongji_id: ebcdac2d132aa663e3ee4c53656bad25
