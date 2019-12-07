@@ -9,4 +9,5 @@ typora-root-url: ../assets/img
 
 ## 2019 回顾
 
-![WechatIMG198](../assets/WechatIMG198.png)
+![WechatIMG198](/assets/WechatIMG198.png)
+
