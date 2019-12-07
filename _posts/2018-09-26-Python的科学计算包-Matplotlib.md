@@ -52,4 +52,4 @@ pip3 install app.py
 效果
 
 
-![](https://chenyongze.github.io/assets/Figure__xxx_1.png)
+![h](../assets/Figure__xxx_1.png)
