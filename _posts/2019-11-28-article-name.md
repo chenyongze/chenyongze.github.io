@@ -11,4 +11,4 @@ typora-root-url: ../assets/img
 
 
 
-![WechatIMG185](/../../_posts/2019-11-28-article-name.assets/WechatIMG185.png)
+![ ](/../WechatIMG185.png)
