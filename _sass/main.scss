@@ -1,0 +1,203 @@
+// @font-face {
+// font-family: Zpix;
+// src: url("Zpix.ttf");
+// }
+
+* {
+  // word-break: break-all;
+  word-wrap: break-word;
+}
+
+body {
+  font-size: 16px;
+  background-color: #eee;
+}
+
+// Georgia
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+body {
+  // font-family: Zpix;
+  font-family: Georgia, serif;
+}
+
+::selection {
+  background: #222;
+  color: #fff;
+}
+
+ul {
+  padding-left: 30px;
+}
+
+.tags-list {
+  li {
+    line-height: 1.7em;
+  }
+  a {
+    text-decoration: underline;
+  }
+}
+
+a {
+  color: #222;
+  &:hover,
+  &:focus,
+  &:visited {
+    color: #222;
+  }
+}
+
+.excerpt {
+  a {
+    text-decoration: underline;
+  }
+}
+
+#markdown-toc {
+  display: none;
+}
+
+img,
+video {
+  border: 2px solid #dfe0e0;
+  border-radius: 4px;
+  max-width: 100%;
+  cursor: pointer;
+}
+
+section {
+  .post {
+    word-wrap: break-word;
+    .item {
+      font-size: 15px;
+      margin-right: 5px;
+      .label.label-black {
+        padding: 0.3em 0.4em;
+        background-color: #222;
+        margin-right: 3px;
+        a {
+          color: #fff;
+        }
+      }
+    }
+    ul {
+      padding-left: 2em;
+      li {
+        line-height: 1.7em;
+      }
+    }
+    .month {
+      margin-left: 15px;
+    }
+  }
+}
+.post-content {
+  a {
+    text-decoration: underline;
+  }
+}
+.relate-post {
+  text-decoration: underline;
+}
+footer {
+  background-color: #fff;
+  padding: 10px 0;
+  a {
+    text-decoration: underline;
+  }
+  .contact {
+    a {
+      font-size: 18px;
+    }
+  }
+}
+
+.navbar {
+  small {
+    width: 100%;
+  }
+}
+
+.panel.panel-default {
+  .table {
+    tr {
+      td {
+        padding: 8px 15px;
+      }
+    }
+  }
+}
+
+.table-of-content {
+  padding-left: 15px;
+  line-height: 1.7em;
+  margin-bottom: 0;
+  ul {
+    padding-left: 15px;
+  }
+}
+
+.paginate {
+  font-size: 16px;
+}
+
+#site_search {
+  padding: 5px;
+}
+
+.back-to-top {
+  position: fixed;
+  left: 50%;
+  margin-left: 580px;
+  bottom: 37px;
+  visibility: hidden;
+  opacity: 0;
+  // transition: 0.4s ease;
+  // box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.3), 0 0 30px rgba(10, 10, 0, 0.1) inset;
+  a {
+    display: block;
+    background-color: #333;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 4px;
+    color: #fff;
+  }
+}
+
+.back-to-top-show {
+  visibility: visible;
+  opacity: 0.7;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 770px) {
+  .back-to-top {
+    left: 50%;
+    margin-left: 45.5%;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .back-to-top {
+    right: 2.5%;
+    left: auto;
+    margin-left: 0;
+    a {
+      width: 33px;
+      height: 33px;
+      line-height: 33px;
+      text-align: center;
+      font-size: 18px;
+    }
+  }
+}

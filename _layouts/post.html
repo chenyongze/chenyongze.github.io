@@ -1,48 +1,43 @@
 ---
 layout: default
 ---
-<section class="collection-head small geopattern" data-pattern-id="{{ page.title | truncate: 15, ''}}">
-<div class="container">
-  <div class="columns">
-    <div class="column three-fourths">
-      <div class="collection-title">
-        <h1 class="collection-header">{{ page.title }}</h1>
-        <div class="collection-info">
-          {% if page.date %}
-          <span class="meta-info">
-            <span class="octicon octicon-calendar"></span> {{ page.date | date: "%Y/%m/%d" }}
+<div class="row">
+  <div class="col-md-9">
+    <div class="panel">
+      <div class="panel-body">
+        <h3>{{ page.title }}</h3>
+        <small>
+          <span class="item">
+            <i class="fa fa-calendar-check-o"></i> {{page.date | date: '%F %H:%M:%S'}}
+          </span>
+          {% if page.author %}
+          <span class="item">
+            <i class="fa fa-user"></i> {{page.author}}
           </span>
           {% endif %}
-          {% for cat in page.categories %}
-          <span class="meta-info">
-            <span class="octicon octicon-file-directory"></span>
-            <a href="{{ site.url }}/categories/#{{ cat }}" title="{{ cat }}">{{ cat }}</a>
-          </span>
-          {% endfor %}
+          {% if page.categories %}
+          {% include categories.html %}
+          {% endif %}
+          {% if page.tags %}
+          {% include tags.html %}
+          {% endif %}
+        </small>
+        <hr>
+        <div class="post-content">
+          {{ page.content }}
+          原文链接: <a href="{{ page.url | prepend: site.url }}">{{ page.url | prepend: site.url }}</a>
+        </div>
+      </div>
+    </div>
+    {% include comments.html %}
+  </div>
+  <div class="col-md-3 hidden-sm hidden-xs">
+    <div class="post-right">
+      <div class="panel panel-default">
+        <div class="panel-heading"><i class="fa fa-list-ul"></i> 文章目录</div>
+        <div class="panel-body toc">
         </div>
       </div>
     </div>
   </div>
 </div>
-</section>
-<!-- / .banner -->
-<section class="container content">
-<div class="columns">
-  <div class="column three-fourths" >
-    <article class="article-content markdown-body">
-    {{ content }}
-    </article>
-    <div class="share">
-      {% include sns-share.html %}
-    </div>
-    <div class="comment">
-      {% include comments.html %}
-    </div>
-  </div>
-  <div class="column one-fourth">
-    {% include sidebar-search.html %}
-    {% include sidebar-post-nav.html %}
-  </div>
-</div>
-</section>
-<!-- /section.content -->
