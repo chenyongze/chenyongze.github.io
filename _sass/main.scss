@@ -1,6 +1,6 @@
 // @font-face {
-  // font-family: Zpix;
-  // src: url("Zpix.ttf");
+// font-family: Zpix;
+// src: url("Zpix.ttf");
 // }
 
 * {
@@ -14,7 +14,13 @@ body {
 }
 
 // Georgia
-h1, h2, h3, h4, h5, h6, body {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+body {
   // font-family: Zpix;
   font-family: Georgia, serif;
 }
@@ -28,7 +34,7 @@ ul {
   padding-left: 30px;
 }
 
-.tags-list{
+.tags-list {
   li {
     line-height: 1.7em;
   }
@@ -39,7 +45,9 @@ ul {
 
 a {
   color: #222;
-  &:hover, &:focus, &:visited {
+  &:hover,
+  &:focus,
+  &:visited {
     color: #222;
   }
 }
@@ -54,7 +62,8 @@ a {
   display: none;
 }
 
-img, video {
+img,
+video {
   border: 2px solid #dfe0e0;
   border-radius: 4px;
   max-width: 100%;
@@ -68,7 +77,7 @@ section {
       font-size: 15px;
       margin-right: 5px;
       .label.label-black {
-        padding: .3em .4em;
+        padding: 0.3em 0.4em;
         background-color: #222;
         margin-right: 3px;
         a {
@@ -84,8 +93,7 @@ section {
     }
     .month {
       margin-left: 15px;
-    }    
-    
+    }
   }
 }
 .post-content {
@@ -168,7 +176,7 @@ footer {
   visibility: visible;
   opacity: 0.7;
   &:hover {
-    opacity: 1
+    opacity: 1;
   }
 }
 
